@@ -1,29 +1,27 @@
-// 动态规划算法
 #include <stdio.h>
 
-int MaxSeqSum(int a[], int N);
+int MaxSubseqSum(int List[], int N);
 
 int main()
 {
-    int N;
-    scanf("%d", &N);
-    int a[N];
+    int N; // 输入N个整数
+    scanf("%d", &N); // 读入N的值
+    int List[N]; // 创建长度为N的数组
+    // 读入N个整数到数组中
     for (int i = 0; i < N; i++)
-        scanf("%d",&a[i]);
-
-    printf("%d", MaxSeqSum(a, N));
-    
+        scanf("%d", &List[i]);
+    printf("%d", MaxSubseqSum(List, N));
     return 0;
 }
 
-int MaxSeqSum(int a[], int N)
+int MaxSubseqSum(int List[], int N)
 {
-    int MaxSum = 0, ThisSum = 0;
+    int thisSum = 0, MaxSum = 0; // 一个当前最大值，一个最终最大值
     for (int i = 0; i < N; i++)
     {
-        ThisSum += a[i];
-        if (ThisSum > MaxSum) MaxSum = ThisSum;
-        else if (ThisSum < 0) ThisSum = 0;
+        thisSum += List[i];
+        if (thisSum > MaxSum) MaxSum = thisSum; // 如果当前值大于最大值，更新最大值
+        else if (thisSum < 0) thisSum = 0; // 如果当前值小于0，则不可能令后面的值增大，故舍去
     }
     return MaxSum;
 }

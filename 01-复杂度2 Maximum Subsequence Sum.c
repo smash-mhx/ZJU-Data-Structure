@@ -1,41 +1,42 @@
-// 动态规划算法
 #include <stdio.h>
 
-int MaxSubSum(int a[], int N, int* first, int* last);
+int MaxSubseqSum(int List[], int N, int* first, int* last);
 
 int main()
 {
-    int N;
+    int N; // 一共有N个数据
     scanf("%d", &N);
-    int a[N];
-    for (int i = 0; i < N; i++)
-        scanf("%d", &a[i]);
-    int first = 0;
-    int last = N - 1;
-    int max = MaxSubSum(a, N, &first, &last);
-    printf("%d %d %d", max, a[first], a[last]);
+    int List[N];
+    for (int i = 0; i < N;i++) 
+        scanf("%d", &List[i]); // 读入N个数据至数组中
+
+    int first = 0; // 最大子列和的第一个数的坐标
+    int last = N - 1; // 最大子列和的最后一个数的坐标
+    int maxSum = MaxSubseqSum(List, N, &first, &last);
+    printf("%d %d %d", maxSum, List[first], List[last]);
     return 0;
 }
 
-int MaxSubSum(int a[], int N, int* first, int* last)
+int MaxSubseqSum(int List[], int N, int* first, int* last)
 {
-    int this = 0, max = -1;
-    int tmpFirstIndex = 0;
+    int thisSum = 0, maxSum = -1;
+    int tmpIndex = 0; // 临时的第一个数的下标
     for (int i = 0; i < N; i++)
     {
-        this += a[i];
-        if (this > max)
+        thisSum += List[i];
+        if (thisSum > maxSum)
         {
-            max = this;
-            *first = tmpFirstIndex;
+            maxSum = thisSum;
+            *first = tmpIndex;
             *last = i;
         }
-        else if (this < 0) 
+        else if (thisSum < 0)
         {
-            this = 0;
-            tmpFirstIndex = i + 1;
+            thisSum = 0;
+            tmpIndex = i + 1;
         }
     }
-    if (max < 0) max = 0;
-    return max;
+    if (maxSum < 0) maxSum = 0;
+    
+    return maxSum;
 }
