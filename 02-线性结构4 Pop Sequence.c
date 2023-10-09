@@ -16,7 +16,7 @@ int main()
         for (int i = 1; i <= n; i ++) scanf("%d", &sq[i]);
         for (int i = 1, j = 1; i <= n; i ++)
         {
-            stack[++top] = i
+            stack[++top] = i;
             if (top > m) break;
             /* 判断能否得到出栈*/
             while (top != 0 && stack[top] == sq[j])

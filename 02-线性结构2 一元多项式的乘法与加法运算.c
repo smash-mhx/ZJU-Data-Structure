@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /* 使用链表来表示多项式 */
 typedef struct PolyNode* PtrToPolyNode;
